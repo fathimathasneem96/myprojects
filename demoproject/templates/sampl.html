@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} E-shop {% endblock %}
+{% block content %}
+
+{% if category %}
+  <div>
+    <div>
+      <p class="text-ceter"><a href= "{% url 'allproducts' %}">Our products category</a></p>
+    </div>
+  </div>
+{% endif %}
+
+<div>
+  {% if category %}
+  <img src="{{category.image.url}}" alt="{{category.name}}" style="width:1500px;height:600px;" >
+</div>
+<br>
+
+<div>
+  <h1>{{category.name}}</h1>
+  <p>{{category.description}}</p>
+</div>
+
+{% else %}
+  <div>
+    <img src="{% static 'img/img.jpg' %}" alt="products" style="width:1800px;height:450px">
+  </div>
+
+  <div>
+    <h1 style="padding-left:3px"">Shop and Enjoy with E-shop</h1>
+    <p style="padding-left:5px">Shopping was a moment to connect with the sacred abundance of Earth and reconnect to a sense of gratitude. Shopping is an activity in which a customer browses the available goods or services presented by one or more retailers with the potential intent to purchase a suitable selection of them. A typology of shopper types has been developed by scholars which identifies one group of shoppers as recreational shoppers,that is, those who enjoy shopping and view it as a leisure activity.There are different products for this like including dress materials, electronics, home decor etc. Scroll down to view the products.</p>
+  </div>
+{% endif %}
+<br>
+
+
+<div class="container">
+  <div class="row">
+    {% for product in products %}
+      <div class="col-9 col-sm-12 col-md-4 col-lg-4">
+        <div class="card text-center" style="width: 18rem;">
+          <a href="{{product.get_url}}"><img class="card-img-top" src="{{product.image.url}}" style="width:250px;height:250px;" alt="{{product.name}}"></a>
+          <div class="card-body">
+            <h5 class="card-title">{{product.name}}</h5>
+            <p class="card-text">{{product.price}}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}
